@@ -3,8 +3,8 @@
 All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, topic history, today's assignment, and their own instructions before generation.
 
 ## Daily batch
-- Exactly three Shorts per daily batch: one each from Claude, OpenCode, and Codex.
-- Codex must be verified available. If unavailable, report it and mark the batch blocked; never pretend or silently substitute.
+- Exactly three Shorts per daily batch: one each from Claude, OpenCode, and Grok.
+- Grok must verify it can access the assigned tools and produce the required deliverable. If a required capability is unavailable, report it and mark the batch blocked; never pretend or silently substitute another agent.
 
 ## 2D only
 - Every finished Short must be genuine 2D animation.
@@ -26,7 +26,7 @@ Coordinator reserves all three assignments before agents start. Compare topic, e
 A shared JSON file is not an atomic lock. Use one coordinator as the sole assignment writer; until orchestration exists, assign sequentially.
 
 ## Voice separation
-Claude's voice-over voice must differ from OpenCode's. Prefer three distinct voices. Record exact provider and preset for every video. Report limitations honestly.
+All three voice-overs should be distinguishable. Claude and OpenCode must not share a voice; record the actual provider and preset for every video. Grok must verify its available voice-generation path and use a third distinct voice where possible. If an agent cannot use a distinct voice, mark the batch as blocked rather than silently duplicating a voice.
 
 ## Sources and rights
 Verify factual claims with reliable sources. Public description must have a clearly labelled Sources section listing source/publisher names only, without URLs. Keep research URLs privately in task metadata when practical. Do not fabricate citations or use unlicensed music, footage, characters, or copied scripts.
