@@ -30,7 +30,7 @@
       "story_format": null,
       "visual_style": null
     },
-    "grok": {
+    "codex": {
       "status": "not_started",
       "availability": "must_verify",
       "github_access": "must_verify",
