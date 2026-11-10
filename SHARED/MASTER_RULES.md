@@ -38,5 +38,10 @@ Each agent submits: finished vertical 2D video, title, sectioned description wit
 Agents never upload directly. Upload only when all three outputs exist, are readable, have complete metadata, pass uniqueness and 2D checks, have sources and rights checked, and meet voice separation. If any one fails, hold all three. Use idempotency keys and record YouTube IDs/timestamps.
 A single batch trigger may start three separate upload actions; do not promise exact same-second publication.
 
+## Temporary usage-limit recovery
+- Follow `SHARED/USAGE_LIMIT_RECOVERY.md` and `TASKS/retry_policy.json` for temporary provider usage/rate limits.
+- Pause the affected agent, preserve its checkpoint and assignment, and resume the same work after the reset/cooldown through the coordinator. Keep the whole batch on hold while any agent is waiting.
+- Authentication, billing, suspension, policy, and unknown errors require manual intervention. Never bypass provider limits.
+
 ## Safety and quality
 Avoid harmful, deceptive, age-inappropriate, or sensational misinformation. Respect YouTube policies and creator rights.
