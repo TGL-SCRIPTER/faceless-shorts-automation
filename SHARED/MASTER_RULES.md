@@ -13,6 +13,7 @@ All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, topic histor
 
 ## Skill-first
 - Inspect and use the installed Faceless Shorts skill for ideas, templates, formats, styles, and production methods.
+- Follow SHARED/SKILL_INTEGRATION.md: only inside-out, stick-story, and paper-atlas are approved; all 3D styles are prohibited.
 - Check other already-installed relevant skills when useful.
 - If no suitable skill idea exists, create an original idea and reserve/check it with the coordinator.
 - Do not claim a skill was inspected unless accessible. Do not install dependencies, buy services, or change account settings without approval.
