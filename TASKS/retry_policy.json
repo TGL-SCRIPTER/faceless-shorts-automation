@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "behavior": "pause_and_resume_same_assignment",
+  "agents": ["claude", "opencode", "codex"],
+  "retry": {
+    "prefer_provider_retry_after": true,
+    "fallback_cooldown_minutes": 60,
+    "max_automatic_retries_per_agent_per_batch": 8,
+    "poll_interval_minutes": 15,
+    "backoff": "exponential",
+    "max_backoff_minutes": 360,
+    "jitter": true
+  },
+  "resume_rules": {
+    "preserve_assignment_and_progress": true,
+    "resume_from_last_safe_checkpoint": true,
+    "do_not_restart_completed_steps": true,
+    "do_not_change_topic_or_assignment": true
+  },
+  "manual_intervention_required_for": [
+    "authentication_or_session_expired",
+    "billing_or_payment_required",
+    "account_suspended_or_policy_block",
+    "provider_does_not_expose_a_reliable_reset_time_and_fallback_retries_exhausted",
+    "repeated_non_quota_errors"
+  ],
+  "safety": {
+    "never_bypass_provider_limits": true,
+    "never_create_extra_accounts_or_rotate_credentials": true,
+    "stop_on_uncertain_or_non_quota_errors": true
+  }
+}
