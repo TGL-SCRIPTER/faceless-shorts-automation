@@ -4,8 +4,8 @@ This documents the intended workflow; it is not yet a live Zapier automation.
 
 ## 1. Coordinator
 - Read requirements and recent topic history.
-- Verify Claude, OpenCode, and Codex availability.
-- If Codex is unavailable, mark the three-agent batch blocked unless the user changes the requirement.
+- Verify Claude, OpenCode, and Grok availability and their actual connected tools.
+- If any agent cannot access its assignment or produce a compliant output, mark the three-agent batch blocked; do not silently substitute another agent.
 - Reserve three distinct topics, angles, hooks, story formats, and dominant 2D visual treatments before launching agents.
 - Run semantic overlap checks against each other and recent history.
 - Write assignments once, then launch agents.
