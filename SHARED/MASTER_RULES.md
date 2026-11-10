@@ -7,8 +7,11 @@ All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, topic histor
 - Codex must be verified available. If unavailable, report it and mark the batch blocked; never pretend or silently substitute.
 
 ## 2D only
-- Every finished Short must be 2D animation.
-- 3D animation, 3D renders, and 3D-looking scenes are not allowed.
+- Every finished Short must be genuine 2D animation.
+- All six Faceless Shorts skill styles are allowed, but Deep Dive, Night File, and Tall Tale must be redesigned as genuine 2D before production.
+- 3D models, geometry, renders, environments, and scenes are prohibited, even if described as stylized or flattened.
+- Preserve the original style's mood and storytelling while replacing all 3D elements with 2D artwork and 2D motion.
+- Follow SHARED/SKILL_INTEGRATION.md and document a 2D conversion plan for any 3D-origin style.
 - Explicitly confirm 2D-only production before submission.
 
 ## Skill-first
