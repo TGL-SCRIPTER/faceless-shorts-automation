@@ -3,7 +3,7 @@
 Coordinated workflow for **three 2D animated YouTube Shorts per daily batch**:
 - Claude: one Short
 - OpenCode: one Short
-- Grok: one Short, subject to verifying that its connected tools and production capabilities support the assigned work
+- Codex: one Short, subject to verifying that its connected tools and production capabilities support the assigned work
 
 ## Non-negotiable rules
 - Every video must be **2D animation only**. Never 3D.
@@ -24,7 +24,7 @@ Coordinated workflow for **three 2D animated YouTube Shorts per daily batch**:
 6. Record YouTube IDs and upload results; retries must not create duplicates.
 
 ## Important capability note
-The repository is an instruction and coordination scaffold; it does not itself make Claude, OpenCode, or Grok run on a schedule. Each agent's actual GitHub access, tools, rendering path, and voice capability must be tested. Do not claim a workflow is operational until its triggers and end-to-end output have been verified.
+The repository is an instruction and coordination scaffold; it does not itself make Claude, OpenCode, or Codex run on a schedule. Each agent's actual GitHub access, tools, rendering path, and voice capability must be tested. Do not claim a workflow is operational until its triggers and end-to-end output have been verified.
 
 ## Cost
 Repository files and local scripts can be free. AI model usage, voice generation, rendering/storage, Zapier tasks, and integrations may have limits or costs. Do not add paid APIs or subscriptions without approval.
