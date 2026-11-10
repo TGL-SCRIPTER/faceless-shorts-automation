@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "batch_id": "YYYY-MM-DD",
+  "batch_status": "blocked_until_configured",
+  "upload_gate": {
+    "all_three_outputs_required": true,
+    "all_three_passed": false,
+    "released": false,
+    "reason": "Initial scaffold; no videos or validation records exist yet."
+  },
+  "videos": {
+    "claude": {
+      "status": "not_started",
+      "video_file": null,
+      "title": null,
+      "description": null,
+      "is_2d": null,
+      "voice_provider": null,
+      "voice_preset": null,
+      "sources_checked": false,
+      "rights_checked": false,
+      "quality_check": "pending",
+      "youtube_video_id": null
+    },
+    "opencode": {
+      "status": "not_started",
+      "video_file": null,
+      "title": null,
+      "description": null,
+      "is_2d": null,
+      "voice_provider": null,
+      "voice_preset": null,
+      "sources_checked": false,
+      "rights_checked": false,
+      "quality_check": "pending",
+      "youtube_video_id": null
+    },
+    "codex": {
+      "status": "not_started",
+      "availability": "must_verify",
+      "video_file": null,
+      "title": null,
+      "description": null,
+      "is_2d": null,
+      "voice_provider": null,
+      "voice_preset": null,
+      "sources_checked": false,
+      "rights_checked": false,
+      "quality_check": "pending",
+      "youtube_video_id": null
+    }
+  },
+  "upload": {
+    "status": "not_started",
+    "attempt_id": null,
+    "started_at": null,
+    "completed_at": null,
+    "results": []
+  }
+}
