@@ -35,7 +35,7 @@
       "quality_check": "pending",
       "youtube_video_id": null
     },
-    "grok": {
+    "codex": {
       "status": "not_started",
       "availability": "must_verify",
       "github_access": "must_verify",
