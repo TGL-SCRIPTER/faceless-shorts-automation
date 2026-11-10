@@ -9,7 +9,7 @@ This file is the entry point for agents working in this repository.
 4. Read the role-specific instructions for the agent you are running:
    - Claude: `AGENTS/CLAUDE.md`
    - OpenCode: `AGENTS/OPENCODE.md`
-   - Grok: `AGENTS/GROK.md`
+   - Codex: `AGENTS/CODEX.md`
 5. Check `TASKS/task_status.json` before starting. If the assignment is missing, ambiguous, already claimed, or conflicts with another agent, stop and ask the coordinator.
 
 ## Non-negotiable project rules
