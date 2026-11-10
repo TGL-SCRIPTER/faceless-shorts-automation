@@ -8,6 +8,12 @@
     "released": false,
     "reason": "Initial scaffold; no videos or validation records exist yet."
   },
+  "usage_recovery": {
+    "policy_file": "TASKS/retry_policy.json",
+    "automatic_resume_enabled_in_policy": true,
+    "scheduler_implemented": false,
+    "note": "Policy scaffold only; automatic resume starts only after a coordinator workflow is implemented and enabled."
+  },
   "videos": {
     "claude": {
       "status": "not_started",
@@ -20,7 +26,15 @@
       "sources_checked": false,
       "rights_checked": false,
       "quality_check": "pending",
-      "youtube_video_id": null
+      "youtube_video_id": null,
+      "usage_recovery": {
+        "state": "idle",
+        "reason": null,
+        "retry_after": null,
+        "retry_count": 0,
+        "last_checkpoint": null,
+        "last_error": null
+      }
     },
     "opencode": {
       "status": "not_started",
@@ -33,7 +47,15 @@
       "sources_checked": false,
       "rights_checked": false,
       "quality_check": "pending",
-      "youtube_video_id": null
+      "youtube_video_id": null,
+      "usage_recovery": {
+        "state": "idle",
+        "reason": null,
+        "retry_after": null,
+        "retry_count": 0,
+        "last_checkpoint": null,
+        "last_error": null
+      }
     },
     "codex": {
       "status": "not_started",
@@ -49,7 +71,15 @@
       "sources_checked": false,
       "rights_checked": false,
       "quality_check": "pending",
-      "youtube_video_id": null
+      "youtube_video_id": null,
+      "usage_recovery": {
+        "state": "idle",
+        "reason": null,
+        "retry_after": null,
+        "retry_count": 0,
+        "last_checkpoint": null,
+        "last_error": null
+      }
     }
   },
   "upload": {
