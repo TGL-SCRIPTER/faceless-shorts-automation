@@ -1,6 +1,6 @@
 # Repository-wide agent instructions
 
-This file is the entry point for coding agents (including OpenCode and Codex) opened in this repository.
+This file is the entry point for agents working in this repository.
 
 ## Before every task
 1. Read `README.md`.
@@ -9,7 +9,7 @@ This file is the entry point for coding agents (including OpenCode and Codex) op
 4. Read the role-specific instructions for the agent you are running:
    - Claude: `AGENTS/CLAUDE.md`
    - OpenCode: `AGENTS/OPENCODE.md`
-   - Codex: `AGENTS/CODEX.md`
+   - Grok: `AGENTS/GROK.md`
 5. Check `TASKS/task_status.json` before starting. If the assignment is missing, ambiguous, already claimed, or conflicts with another agent, stop and ask the coordinator.
 
 ## Non-negotiable project rules
