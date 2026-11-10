@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "batch_id": "YYYY-MM-DD",
+  "status": "not_assigned",
+  "coordination": {
+    "coordinator": "single-writer",
+    "all_assignments_reserved_before_generation": false,
+    "semantic_duplicate_check": "pending"
+  },
+  "global_constraints": {
+    "daily_batch_size": 3,
+    "animation": "2D only",
+    "no_3d": true,
+    "upload_only_after_all_three_pass": true
+  },
+  "assignments": {
+    "claude": {
+      "status": "not_started",
+      "topic": null,
+      "angle": null,
+      "hook": null,
+      "story_format": null,
+      "visual_style": null
+    },
+    "opencode": {
+      "status": "not_started",
+      "topic": null,
+      "angle": null,
+      "hook": null,
+      "story_format": null,
+      "visual_style": null
+    },
+    "codex": {
+      "status": "not_started",
+      "availability": "must_verify",
+      "topic": null,
+      "angle": null,
+      "hook": null,
+      "story_format": null,
+      "visual_style": null
+    }
+  }
+}
