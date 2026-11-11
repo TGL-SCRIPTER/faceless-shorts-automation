@@ -9,6 +9,7 @@
     "README.md",
     "COMMANDS.md",
     "AGENTS.md",
+    "AGENTS/CONTEXT_LOADING.md",
     "SHARED/MASTER_RULES.md",
     "SHARED/VIDEO_REQUIREMENTS.md",
     "SHARED/STYLE_LIBRARY.md",
@@ -36,6 +37,7 @@
     "GitHub Actions builds a commit-specific knowledge-cache artifact from the stable files listed above.",
     "Artifacts are retained for 90 days and must be downloaded from the latest successful workflow run.",
     "Assignments, task status, control state and topic history must be refreshed for each batch.",
-    "Never treat a manifest or old artifact as proof that the cache for the current main commit was successfully built."
+    "Never treat a manifest or old artifact as proof that the cache for the current main commit was successfully built.",
+    "Agents follow AGENTS/CONTEXT_LOADING.md: read shared manifest files and only their own role file; refresh all always_fresh_files every batch. The Actions artifact is optional and is not automatically injected into agent context."
   ]
 }
