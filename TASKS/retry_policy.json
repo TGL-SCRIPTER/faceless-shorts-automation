@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "enabled": true,
-  "behavior": "pause_and_resume_same_assignment",
-  "agents": ["claude", "opencode", "codex"],
+  "behavior": "pause_checkpoint_resume_same_assignment",
+  "agents": ["claude", "opencode", "codex", "chatgpt"],
   "retry": {
     "prefer_provider_retry_after": true,
     "fallback_cooldown_minutes": 60,
@@ -11,6 +11,21 @@
     "backoff": "exponential",
     "max_backoff_minutes": 360,
     "jitter": true
+  },
+  "opencode_context": {
+    "checkpoint_threshold_percent": 90,
+    "start_new_session_after_checkpoint": true,
+    "preserve_assignment": true,
+    "resume_from_next_incomplete_step": true,
+    "context_threshold_is_not_provider_quota_reset": true
+  },
+  "model_fallback": {
+    "enabled": true,
+    "applies_to": ["opencode"],
+    "fallbacks_file": "TASKS/model_fallbacks.json",
+    "only_use_verified_available_models": true,
+    "require_user_approval_for_paid_models": true,
+    "never_bypass_provider_limits": true
   },
   "resume_rules": {
     "preserve_assignment_and_progress": true,
@@ -23,6 +38,7 @@
     "billing_or_payment_required",
     "account_suspended_or_policy_block",
     "provider_does_not_expose_a_reliable_reset_time_and_fallback_retries_exhausted",
+    "no_verified_suitable_fallback_available",
     "repeated_non_quota_errors"
   ],
   "safety": {
