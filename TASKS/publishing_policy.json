@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "timezone": "Asia/Kolkata",
+  "agent_count_target": 4,
+  "normal_daily_publish_target": 4,
+  "normal_daily_publish_cap": 4,
+  "release_schedule": {
+    "primary_time": "18:00",
+    "primary_condition": "if_at_least_four_validated_videos_are_ready",
+    "primary_action": "schedule_first_four_validated_queue_items_with_one_common_publish_timestamp",
+    "midnight_fallback_time": "00:00",
+    "midnight_condition": "if_fewer_than_four_validated_videos_are_ready_at_primary_time",
+    "midnight_action": "schedule_all_currently_validated_available_queue_items_together",
+    "timezone_required": true
+  },
+  "queue": {
+    "persist_overflow": true,
+    "never_discard_completed_video": true,
+    "normal_overflow_action": "carry_forward_to_next_day",
+    "backlog_release_threshold": 15,
+    "backlog_release_action": "schedule_entire_validated_backlog_as_one_coordinated_batch",
+    "backlog_release_overrides_normal_daily_cap": true,
+    "count_only_validated_ready_videos": true,
+    "order": "oldest_ready_first"
+  },
+  "same_time": {
+    "use_one_common_scheduled_publish_timestamp_per_release_batch": true,
+    "guarantee_exact_same_second_public_visibility": false,
+    "record_actual_platform_timestamps": true
+  },
+  "validation": {
+    "require_video_playability": true,
+    "require_metadata_and_sources": true,
+    "require_2d_and_rights_checks": true,
+    "require_unique_idempotency_key": true,
+    "coordinator_only_upload": true
+  },
+  "comments": {
+    "enabled": true,
+    "text": "𝐒𝐮𝐛𝐬𝐜𝐫𝐢𝐛𝐞 𝐟𝐨𝐫 𝐦𝐨𝐫𝐞 𝐟𝐮𝐧 𝐟𝐚𝐜𝐭 𝐜𝐨𝐧𝐭𝐞𝐧𝐭 𝐚𝐧𝐝 𝐠𝐞𝐭 𝐧𝐨𝐭𝐢𝐟𝐢𝐞𝐝!",
+    "attempt_once_per_video": true,
+    "only_after_successful_upload": true,
+    "requires_comments_enabled_and_api_permission": true,
+    "record_manual_action_if_unavailable": true,
+    "markdown_bold_supported": false,
+    "unicode_bold_style_used": true
+  },
+  "status": "policy_only_scheduler_not_implemented"
+}
