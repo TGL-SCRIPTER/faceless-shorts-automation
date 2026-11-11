@@ -5,7 +5,7 @@ This file is the entry point for agents working in this repository.
 ## Before every task
 1. Read `README.md`.
 2. Read `SHARED/MASTER_RULES.md`, `SHARED/VIDEO_REQUIREMENTS.md`, `SHARED/STYLE_LIBRARY.md`, `SHARED/SKILL_INTEGRATION.md`, and `SHARED/AGENT_CHARACTERS.json`.
-3. Read `SHARED/TOPIC_HISTORY.json`, `TASKS/daily_assignments.json`, `TASKS/task_status.json`, and `TASKS/publishing_policy.json`.
+3. Read `SHARED/TOPIC_HISTORY.json`, `SHARED/TREND_AND_STYLE_SELECTION.md`, `SHARED/CUSTOM_STYLES/REGISTRY.json`, `TASKS/daily_assignments.json`, `TASKS/task_status.json`, and `TASKS/publishing_policy.json`.
 4. Read the role-specific instructions for your agent:
    - Claude: `AGENTS/CLAUDE.md`
    - OpenCode: `AGENTS/OPENCODE.md`
