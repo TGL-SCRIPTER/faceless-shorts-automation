@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "rule": "Each agent may use only its own character. Keep identity, silhouette, palette, proportions, and signature accessories consistent. These are original generic characters, not provider logos or mascots.",
+  "characters": {
+    "claude_comet": {
+      "agent": "claude",
+      "name": "Comet",
+      "visual_identity": "A small warm-orange fox-like explorer with a cream muzzle, one teal scarf, and a tiny star-shaped satchel badge.",
+      "palette": ["warm orange", "cream", "teal"],
+      "silhouette": "Pointed ears, compact rounded body, fluffy tail with a cream tip.",
+      "signature_motion": "Quick curious head tilts and short tail swishes.",
+      "exclusive_use": true
+    },
+    "opencode_spark": {
+      "agent": "opencode",
+      "name": "Spark",
+      "visual_identity": "A compact mint-green helper robot with a rounded square head, one dark face screen, two small antenna dots, and a yellow lightning-shaped chest mark.",
+      "palette": ["mint green", "charcoal", "yellow"],
+      "silhouette": "Rounded square head, small capsule body, short articulated arms.",
+      "signature_motion": "Small mechanical hops and a two-frame chest-light pulse.",
+      "exclusive_use": true
+    },
+    "codex_owl": {
+      "agent": "codex",
+      "name": "Pixel",
+      "visual_identity": "A cobalt-blue little owl with oversized circular amber glasses, a pale belly, and a tiny notebook tucked under one wing.",
+      "palette": ["cobalt blue", "pale blue", "amber"],
+      "silhouette": "Wide owl head, short wings, small feet, round glasses.",
+      "signature_motion": "One-wing page flip and a deliberate double blink.",
+      "exclusive_use": true
+    },
+    "chatgpt_orbit": {
+      "agent": "chatgpt",
+      "name": "Orbit",
+      "visual_identity": "A violet floating star-compass character with a soft rounded four-point silhouette, two expressive eyes, and a small orbiting golden dot.",
+      "palette": ["violet", "lavender", "gold"],
+      "silhouette": "Rounded four-point star with a single orbiting dot.",
+      "signature_motion": "Gentle rotation and a short orbiting-dot loop.",
+      "exclusive_use": true
+    }
+  }
+}
