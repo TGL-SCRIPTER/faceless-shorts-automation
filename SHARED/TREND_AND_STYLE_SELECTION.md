@@ -1,31 +1,35 @@
-# Trend-aware topic and adaptive style selection
+# Educational trend and adaptive style selection
 
-## Purpose
-Select topics with promising audience-interest signals, then choose or invent the most suitable original 2D visual style for each topic. This process improves decision quality; it cannot predict or guarantee virality.
+## Channel scope
+This channel makes educational explainers and interesting, verified facts. Trends are useful only when they reveal a subject people want to understand.
+
+**Allowed topic families:** science, space and astronomy, technology and computing, engineering, nature and animals, history, geography, inventions, and useful everyday "how/why" explanations.
+
+**Not eligible:** reaction videos, reaction commentary, drama, gossip, prank/reaction compilations, memes as the main content, and trends that provide no meaningful educational takeaway. Do not make a reaction video just because reactions are trending.
 
 ## Research procedure
-1. Generate a shortlist of candidate topics relevant to the channel's educational/fun-fact identity.
-2. Check current YouTube Shorts and audience-interest signals using tools actually available to the agent. Use YouTube search/trending surfaces, Google Trends or other reputable public trend sources when accessible.
-3. Record the date/time checked, region, language, source names, observed signal, and any data limitations.
-4. Look for more than one independent signal where possible: recent interest growth, repeated questions/comments, strong current relevance, or comparable Shorts with recent engagement.
-5. Check the channel's topic history and the current four-agent batch for duplicates and saturation.
+1. Generate candidate educational questions and fact-based topics relevant to the channel.
+2. Check current educational interest and YouTube Shorts signals using tools actually available to the agent. Use YouTube search/trending surfaces, Google Trends or reputable public sources when accessible.
+3. Record the date/time checked, region, language, source names, observed signal, and data limitations.
+4. Look for more than one independent signal where possible: rising search interest, repeated audience questions, current educational relevance, or comparable educational Shorts with recent engagement.
+5. Check topic history and the current four-agent batch for duplicates and saturation.
 6. Fact-check the central claim before committing. Reject topics without credible supporting evidence.
-7. Score candidates with the rubric below, select the best fit, and explain the choice.
+7. Score candidates with the rubric below and select the best educational fit.
 
 ## Candidate scoring (0–100)
-- Audience interest / trend evidence: 0–25
-- Curiosity and hook potential: 0–20
+- Educational value and clarity of learning takeaway: 0–25
+- Audience interest / educational trend evidence: 0–20
+- Curiosity and hook potential: 0–15
 - Visual storytelling potential in 2D: 0–15
-- Broad relevance / shareability: 0–15
 - Credibility and source quality: 0–15
 - Freshness and low overlap with recent channel topics: 0–10
 
 Subtract up to 20 points for strong saturation, weak evidence, misleading framing risk, or poor fit with channel identity. Record deductions and reasoning.
 
-The score is a comparative editorial score, not a measured probability of going viral. Never write "X% chance of going viral" unless a genuinely validated predictive model and its calibration evidence exist; this project currently has no such model.
+The score is a comparative editorial score, not a measured probability of going viral. Never write "X% chance of going viral"; this project has no validated predictive model. A trend score does not guarantee reach.
 
 ## Style selection after topic selection
-1. Write a one-sentence summary of the topic and intended audience takeaway.
+1. Write the educational question and the one-sentence learning takeaway.
 2. Compare at least two relevant styles from the existing library when practical.
 3. Choose the style that makes the concept easiest to understand and most engaging without sacrificing factual clarity.
 4. If no existing style fits well, create an original topic-specific style. Do not invent a new style simply to make every video look different.
@@ -54,4 +58,4 @@ Save new style specifications under `SHARED/CUSTOM_STYLES/<style-id>.md` and reg
 
 ## Agent handoff fields
 Every assignment and finished-video report should include:
-`candidate_topics`, `trend_sources`, `trend_checked_at`, `trend_region`, `trend_language`, `trend_signals`, `editorial_score`, `score_rationale`, `selected_style_id`, `style_type` (existing/adapted/new), `style_fit_rationale`, and optional `custom_style_spec_path`.
+`candidate_topics`, `trend_sources`, `trend_checked_at`, `trend_region`, `trend_language`, `trend_signals`, `educational_takeaway`, `editorial_score`, `score_rationale`, `selected_style_id`, `style_type` (existing/adapted/new), `style_fit_rationale`, and optional `custom_style_spec_path`.
