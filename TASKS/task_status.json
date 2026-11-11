@@ -1,92 +1,40 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "batch_id": "YYYY-MM-DD",
   "batch_status": "blocked_until_configured",
+  "agent_count_target": 4,
   "upload_gate": {
-    "all_three_outputs_required": true,
-    "all_three_passed": false,
+    "validated_ready_videos_required_for_normal_release": 4,
+    "all_ready": false,
     "released": false,
-    "reason": "Initial scaffold; no videos or validation records exist yet."
+    "reason": "Policy scaffold only; no production files or end-to-end scheduler validation exist yet."
   },
   "usage_recovery": {
     "policy_file": "TASKS/retry_policy.json",
     "automatic_resume_enabled_in_policy": true,
     "scheduler_implemented": false,
-    "note": "Policy scaffold only; automatic resume starts only after a coordinator workflow is implemented and enabled."
+    "opencode_context_rollover_implemented": false,
+    "note": "Configuration only. Scheduler and supported provider/session invocation integrations are not yet implemented."
+  },
+  "queue": {
+    "policy_file": "TASKS/publishing_policy.json",
+    "storage_backend": "not_configured",
+    "validated_ready_count": 0,
+    "normal_daily_cap": 4,
+    "backlog_release_threshold": 15,
+    "next_release": null,
+    "items": []
+  },
+  "notifications": {
+    "policy_file": "TASKS/notification_policy.json",
+    "whatsapp_configured": false,
+    "last_delivery": null
   },
   "videos": {
-    "claude": {
-      "status": "not_started",
-      "video_file": null,
-      "title": null,
-      "description": null,
-      "is_2d": null,
-      "voice_provider": null,
-      "voice_preset": null,
-      "sources_checked": false,
-      "rights_checked": false,
-      "quality_check": "pending",
-      "youtube_video_id": null,
-      "usage_recovery": {
-        "state": "idle",
-        "reason": null,
-        "retry_after": null,
-        "retry_count": 0,
-        "last_checkpoint": null,
-        "last_error": null
-      }
-    },
-    "opencode": {
-      "status": "not_started",
-      "video_file": null,
-      "title": null,
-      "description": null,
-      "is_2d": null,
-      "voice_provider": null,
-      "voice_preset": null,
-      "sources_checked": false,
-      "rights_checked": false,
-      "quality_check": "pending",
-      "youtube_video_id": null,
-      "usage_recovery": {
-        "state": "idle",
-        "reason": null,
-        "retry_after": null,
-        "retry_count": 0,
-        "last_checkpoint": null,
-        "last_error": null
-      }
-    },
-    "codex": {
-      "status": "not_started",
-      "availability": "must_verify",
-      "github_access": "must_verify",
-      "production_capabilities": "must_verify",
-      "video_file": null,
-      "title": null,
-      "description": null,
-      "is_2d": null,
-      "voice_provider": null,
-      "voice_preset": null,
-      "sources_checked": false,
-      "rights_checked": false,
-      "quality_check": "pending",
-      "youtube_video_id": null,
-      "usage_recovery": {
-        "state": "idle",
-        "reason": null,
-        "retry_after": null,
-        "retry_count": 0,
-        "last_checkpoint": null,
-        "last_error": null
-      }
-    }
+    "claude": {"status": "not_started", "character_id": "claude_comet", "video_file": null, "title": null, "description": null, "is_2d": null, "voice_provider": null, "voice_preset": null, "sources_checked": false, "rights_checked": false, "quality_check": "pending", "youtube_video_id": null, "usage_recovery": {"state": "idle", "reason": null, "retry_after": null, "retry_count": 0, "last_checkpoint": null, "last_error": null}},
+    "opencode": {"status": "not_started", "character_id": "opencode_spark", "primary_model": "GLM-5.3-Flash", "active_model": null, "context_percent": null, "checkpoint_file": null, "video_file": null, "title": null, "description": null, "is_2d": null, "voice_provider": null, "voice_preset": null, "sources_checked": false, "rights_checked": false, "quality_check": "pending", "youtube_video_id": null, "usage_recovery": {"state": "idle", "reason": null, "retry_after": null, "retry_count": 0, "last_checkpoint": null, "last_error": null}},
+    "codex": {"status": "not_started", "availability": "must_verify", "github_access": "must_verify", "production_capabilities": "must_verify", "character_id": "codex_owl", "video_file": null, "title": null, "description": null, "is_2d": null, "voice_provider": null, "voice_preset": null, "sources_checked": false, "rights_checked": false, "quality_check": "pending", "youtube_video_id": null, "usage_recovery": {"state": "idle", "reason": null, "retry_after": null, "retry_count": 0, "last_checkpoint": null, "last_error": null}},
+    "chatgpt": {"status": "not_started", "availability": "interactive_or_api_must_verify", "production_capabilities": "must_verify", "character_id": "chatgpt_orbit", "video_file": null, "title": null, "description": null, "is_2d": null, "voice_provider": null, "voice_preset": null, "sources_checked": false, "rights_checked": false, "quality_check": "pending", "youtube_video_id": null, "usage_recovery": {"state": "idle", "reason": null, "retry_after": null, "retry_count": 0, "last_checkpoint": null, "last_error": null}}
   },
-  "upload": {
-    "status": "not_started",
-    "attempt_id": null,
-    "started_at": null,
-    "completed_at": null,
-    "results": []
-  }
+  "upload": {"status": "not_started", "attempt_id": null, "started_at": null, "completed_at": null, "results": []}
 }
