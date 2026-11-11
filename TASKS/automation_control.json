@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "mode": "paused",
+  "schedule_enabled": false,
+  "active_batch_id": null,
+  "last_command": null,
+  "last_command_at": null,
+  "last_actor_id": null,
+  "pending_runs": [],
+  "active_tasks": [],
+  "preserve_completed_outputs": true,
+  "implementation_status": "specification_only_dispatcher_not_implemented",
+  "notes": "Initial safe state. /short and /unshort require an authenticated command dispatcher and scheduler integration before they can change live automation."
+}
