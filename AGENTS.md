@@ -3,25 +3,10 @@
 This file is the entry point for agents working in this repository.
 
 ## Before every task
-1. Read the small cache status/version record from the coordinator.
-2. Reuse the versioned shared knowledge bundle defined by `CACHE/MANIFEST.json` and `CACHE/README.md`. Do not reread every permanent GitHub instruction file when the verified bundle is current.
-3. Refresh live task data for every batch: `TASKS/automation_control.json`, `TASKS/daily_assignments.json`, `TASKS/task_status.json`, and `SHARED/TOPIC_HISTORY.json`.
-4. Confirm the bundle's repository, branch, commit SHA, schema version, and integrity checks. If missing, stale, or invalid, ask the coordinator to sync; do not silently proceed with stale instructions.
-5. Read your role-specific instructions from the active bundle:
-   - Claude: `AGENTS/CLAUDE.md`
-   - OpenCode: `AGENTS/OPENCODE.md`
-   - Codex: `AGENTS/CODEX.md`
-   - ChatGPT: `AGENTS/CHATGPT.md`
-6. Check the live task status. If the assignment is missing, ambiguous, already claimed, conflicts with another agent, or global mode is paused, stop and ask the coordinator.
 
-## Cache rules
-- GitHub `main` is the source of truth; the shared knowledge bundle is a versioned read cache, never an independent source of policy.
-- Reuse a verified current bundle for stable rules and role instructions. Do not individually fetch those files on every Short.
-- A GitHub update must trigger coordinator synchronization. Agents adopt the new bundle at the next safe task boundary.
-- Dynamic assignments, status, topic history, and global control state must be refreshed each batch; never treat them as permanent cached instructions.
-- If sync or integrity validation fails, pause and ask the coordinator. Never claim the cache is current without a verified commit SHA.
-- Do not store secrets, tokens, private user data, or generated videos in the knowledge bundle.
-- Follow `SHARED/KNOWLEDGE_CACHE_PROTOCOL.md`.
+Follow `AGENTS/CONTEXT_LOADING.md` first. It defines the minimal stable files to read, the four live files to refresh, and the batch gate. Do not scan the repository or read unrelated files.
+
+<!-- legacy startup replaced below -->
 
 ## Non-negotiable project rules
 - Educational explainers and verified fun facts only. No reaction videos, reaction commentary, drama, gossip, or trend-chasing without a learning takeaway.
