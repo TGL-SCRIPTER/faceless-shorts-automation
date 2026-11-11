@@ -18,10 +18,6 @@
     "SHARED/TREND_AND_STYLE_SELECTION.md",
     "SHARED/CUSTOM_STYLES/REGISTRY.json",
     "SHARED/USAGE_LIMIT_RECOVERY.md",
-    "AGENTS/CLAUDE.md",
-    "AGENTS/OPENCODE.md",
-    "AGENTS/CODEX.md",
-    "AGENTS/CHATGPT.md",
     "TASKS/publishing_policy.json",
     "TASKS/retry_policy.json",
     "TASKS/model_fallbacks.json",
@@ -38,6 +34,6 @@
     "Artifacts are retained for 90 days and must be downloaded from the latest successful workflow run.",
     "Assignments, task status, control state and topic history must be refreshed for each batch.",
     "Never treat a manifest or old artifact as proof that the cache for the current main commit was successfully built.",
-    "Agents follow AGENTS/CONTEXT_LOADING.md: read shared manifest files and only their own role file; refresh all always_fresh_files every batch. The Actions artifact is optional and is not automatically injected into agent context."
+    "Agent role files are deliberately excluded from the shared files list; each agent must fetch only its own role file separately."
   ]
 }
