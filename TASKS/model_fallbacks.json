@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "configuration_template",
+  "primary": {
+    "agent": "opencode",
+    "provider": "configured_by_user",
+    "model": "GLM-5.3-Flash"
+  },
+  "fallback_selection": {
+    "policy": "choose_first_verified_available_suitable_model",
+    "require_free_or_local_by_default": true,
+    "require_user_approval_for_paid": true,
+    "never_rotate_accounts_or_credentials": true,
+    "never_bypass_provider_limits": true,
+    "preserve_agent_character_and_assignment": true
+  },
+  "fallbacks": [
+    {
+      "provider": null,
+      "model": null,
+      "availability": "not_verified",
+      "cost": "must_verify",
+      "notes": "Add only a model that is already configured and genuinely accessible in the user's OpenCode installation."
+    }
+  ],
+  "important": "No fallback model is currently confirmed by this file. The coordinator must verify actual provider access and current quota before selecting one. Do not invent reset times or promise free availability."
+}
