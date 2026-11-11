@@ -1,35 +1,44 @@
 # Knowledge cache protocol
 
+## Storage and source of truth
+GitHub `main` is the source of truth. GitHub Actions builds a complete cache bundle
+and publishes it as a downloadable Actions artifact. No external cloud storage is
+required. Artifacts are retained for 90 days.
+
 ## What belongs in the cache
-Stable instructions, production standards, character definitions, role instructions, style definitions, and stable publishing/retry policies listed in `CACHE/MANIFEST.json`.
+Stable instructions, production standards, character definitions, role instructions,
+style definitions, and stable publishing/retry policies listed in
+`CACHE/MANIFEST.json`.
 
 ## What must remain live
-The global pause/run state, today's assignments, current task statuses, topic history, and any per-batch data. Refresh these from the source of truth at the start of every batch. Never let a stale cached assignment or topic history authorize duplicate work.
+The global pause/run state, today's assignments, current task statuses, topic history,
+and any per-batch data. Refresh these directly from GitHub at the start of every batch.
+Never let a stale cached assignment or topic history authorize duplicate work.
 
 ## Startup sequence for every agent
-1. Ask the coordinator for the active bundle version and source commit SHA.
-2. Reuse the local bundle only if its repository, branch, commit SHA, schema version, and integrity checks match the coordinator's active version.
-3. If absent or stale, request the shared bundle; do not fetch every permanent file independently if the coordinator can supply the bundle.
-4. Refresh all `always_fresh_files` directly through the coordinator's live data interface.
+1. Identify the latest successful **Build GitHub knowledge cache** workflow run.
+2. Download its artifact and confirm its source commit matches the intended `main`
+   commit.
+3. Verify the bundle schema, repository, commit SHA, and per-file SHA-256 checksums.
+4. Refresh every `always_fresh_files` directly from GitHub.
 5. Confirm the global mode is running and the task is assigned to this agent.
-6. Begin generation.
+6. Load the stable bundle into the task context before generation.
 
 ## Update sequence
-1. A GitHub push to the configured branch signals the sync process.
-2. The coordinator compares the new commit with the last successfully synchronized commit.
-3. Fetch only changed cache-manifest files, plus any newly required files.
-4. Rebuild and validate the complete versioned bundle.
-5. Atomically publish it to durable shared storage and update the active pointer.
-6. Agents adopt the new bundle at their next safe task boundary. Do not silently change instructions mid-render.
-7. If the update changes safety, publishing, or command-control rules, pause new tasks until all runners acknowledge the new version.
+1. A relevant push to `main` triggers the cache workflow.
+2. The workflow reads all manifest files from that exact checkout.
+3. It builds the full bundle and checksum index.
+4. GitHub Actions stores both files in a commit-specific artifact.
+5. Agents adopt the new bundle at their next safe task boundary.
 
 ## Failure behavior
-- If shared storage is unavailable, do not claim synchronization succeeded.
-- If an agent cannot verify bundle integrity/currentness, pause that agent and ask the coordinator to sync.
-- Never fall back to a stale cache without an explicit coordinator-approved emergency policy.
-- Retain the last known-good bundle for rollback, but mark it stale.
+If the workflow fails, the artifact is missing, the source commit does not match,
+or integrity checks fail, do not claim synchronization succeeded. Do not silently
+use an older bundle as current. Keep the last artifact only for diagnosis/rollback,
+marked stale.
 
-## Cost and context behavior
-- The cache reduces repeated repository fetching and repeated instruction assembly.
-- It does not eliminate the model's need to receive relevant instructions in its context. Each agent runner must load the cached bundle into its task context, ideally once per persistent worker/session.
-- A new model session may need the bundle context reloaded from shared storage, but it does not need to fetch every source file from GitHub again.
+## Important boundary
+This artifact workflow stores and versions the cache, but does not automatically
+download it into Claude, OpenCode, Codex, or ChatGPT. Each agent runner still needs
+a download-and-load step. It also does not implement the project dispatcher,
+scheduler, or publishing automation.
