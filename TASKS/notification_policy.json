@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "channels": {
+    "whatsapp": {
+      "enabled": false,
+      "provider": "not_configured",
+      "supported_routes_to_evaluate": ["WhatsApp Business Cloud API", "Twilio WhatsApp", "Zapier WhatsApp integration"],
+      "recipient_secret_name": "WHATSAPP_RECIPIENT",
+      "credentials_secret_names": ["WHATSAPP_ACCESS_TOKEN", "WHATSAPP_PHONE_NUMBER_ID"],
+      "never_store_phone_or_tokens_in_repository": true,
+      "requires_provider_setup_and_user_consent": true
+    },
+    "fallback": {
+      "enabled": true,
+      "destination": "coordinator_log_or_github_issue",
+      "must_not_claim_whatsapp_delivery": true
+    }
+  },
+  "events": [
+    "agent_usage_limit_or_quota_expired",
+    "agent_session_expired",
+    "agent_missing_video_at_18_00",
+    "agent_missing_video_at_00_00",
+    "agent_model_fallback_selected",
+    "agent_manual_action_required",
+    "workflow_or_render_failure",
+    "storage_or_upload_failure",
+    "comment_failed_or_comments_disabled",
+    "publishing_batch_released",
+    "publishing_batch_partial_failure",
+    "backlog_threshold_reached"
+  ],
+  "message_fields": [
+    "timestamp",
+    "batch_id",
+    "agent",
+    "event",
+    "severity",
+    "what_happened",
+    "what_is_blocked",
+    "manual_action",
+    "next_retry_or_schedule"
+  ],
+  "deduplication": {
+    "same_event_key_sent_once_until_state_changes": true,
+    "include_batch_id_and_agent_in_event_key": true
+  },
+  "status": "policy_only_no_whatsapp_connection_or_scheduler_configured"
+}
