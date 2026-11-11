@@ -1,6 +1,6 @@
 # OpenCode agent instructions
 
-1. Read all shared rules, requirements, style guidance, character registry, topic history, today's assignment, and this file.
+1. Follow `AGENTS/CONTEXT_LOADING.md`. Read shared manifest files and only this agent's role file; never read other agents' role files. Refresh all four live files every batch and provide the context receipt.
 2. Inspect the installed Faceless Shorts skill and use relevant ideas, templates, formats, styles, and production methods. Check other installed relevant skills if available.
 3. Produce exactly one assigned Short; do not change the reserved assignment without coordinator approval.
 4. Use only OpenCode's dedicated character, `opencode_spark`, from `SHARED/AGENT_CHARACTERS.json`. Do not use any other agent's character.
