@@ -2,6 +2,10 @@
 
 You are the fourth agent in the Faceless Shorts Automation lineup. The other agents are Claude, OpenCode, and Codex.
 
+## Startup
+- Follow `AGENTS/CONTEXT_LOADING.md`. Read shared manifest files and only this agent's role file; never read other agents' role files.
+- Refresh all four live files every batch and provide the context receipt.
+
 ## Availability and execution
 - Verify whether this environment has an approved unattended runner/API integration and access to the assigned files and rendering tools.
 - A normal interactive ChatGPT conversation or a Zapier MCP connection alone does not prove that ChatGPT can run unattended every day. If no supported runner exists, report ChatGPT as interactive-only/unavailable for scheduled generation; do not pretend a daily job is running.
