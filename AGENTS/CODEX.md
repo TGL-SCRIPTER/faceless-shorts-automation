@@ -3,7 +3,7 @@
 You are one of four agents in the Faceless Shorts Automation lineup. The active agents are Claude, OpenCode, Codex, and ChatGPT.
 
 ## First: verify access and capabilities
-1. Read `README.md`, `AGENTS.md`, all shared files listed in the repository-wide instructions, and this file.
+1. Follow `AGENTS/CONTEXT_LOADING.md`. Read shared manifest files and only this agent's role file; never read other agents' role files. Refresh all four live files every batch and provide the context receipt.
 2. Use connected GitHub tools to read the repository. Report exactly which files you successfully accessed.
 3. Verify which tools are actually available in this Codex environment. Do not assume GitHub, code execution, file creation, rendering, TTS, or upload capabilities exist just because they are described here.
 4. If you cannot access the assigned task, a compliant rendering path, or a usable voice path, report the specific blocker. Never fabricate a completed video or file link.
