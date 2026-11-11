@@ -3,16 +3,17 @@
   "art_direction": {
     "style": "Original friendly 2D educational Shorts avatar; clean flat vector/cartoon illustration, rounded shapes, expressive eyes, simple soft shading, bold readable silhouette, bright but balanced colors.",
     "reference_policy": "Use the user's reference only as a high-level description of the broad cartoon style. Never upload, attach, feed, trace, copy, recreate, or otherwise use the reference screenshot/image as an input asset for any agent or video-generation model. All four avatars below are original designs created from written descriptions.",
-    "consistency": "Each agent must use only its assigned character. Keep face, hairstyle, outfit, palette, proportions, and signature accessory consistent across that agent's videos. Characters must be independently drawn/animated; do not reuse the same base character with only a recolored hoodie.",
+    "branding_policy": "Do not show, mention, draw, imitate, or hint at the logo, symbol, mascot, brand mark, or corporate identity of Claude, OpenAI, ChatGPT, Codex, OpenCode, GLM, or any AI provider. Characters must look like independent fictional presenters, not representatives of the AI tools that create them. No logos, badges, patches, emblems, branded clothing, or recognizable provider symbols.",
+    "consistency": "Each agent must use only its assigned character. Keep face, hairstyle, outfit, palette, proportions, and generic non-branded accessory consistent across that agent's videos. Characters must be independently drawn/animated; do not reuse the same base character with only a recolored hoodie.",
     "animation": "Use simple 2D motions such as blinking, mouth movement, pointing, nodding, hand gestures, and small body movement."
   },
   "characters": {
     "claude_comet": {
       "agent": "claude",
       "name": "Ari",
-      "visual_identity": "A friendly young cartoon presenter with wavy dark-brown hair, warm orange hoodie, expressive dark eyes, and a small comet badge. Original face shape and hairstyle; do not copy any real person or reference screenshot subject.",
+      "visual_identity": "A friendly young cartoon presenter with wavy dark-brown hair, a plain warm-orange hoodie with no badge, logo, patch, or symbol, and expressive dark eyes. Original face shape and hairstyle; do not copy any real person or reference screenshot subject.",
       "palette": ["orange", "cream", "dark brown"],
-      "signature_accessory": "Small comet badge on hoodie",
+      "signature_accessory": "No accessory; the wavy hairstyle and orange hoodie define the character.",
       "signature_pose": "Open-hand explanation gesture",
       "signature_motion": "Friendly nod, blink, and open-hand gesture",
       "exclusive_use": true
@@ -20,9 +21,9 @@
     "opencode_spark": {
       "agent": "opencode",
       "name": "Mika",
-      "visual_identity": "A distinct cartoon presenter with short side-swept dark hair, mint-green jacket over a charcoal shirt, teal headphones around the neck, and a small code-bracket patch. Different face shape, hair silhouette, and outfit from all other agents.",
+      "visual_identity": "A distinct cartoon presenter with short side-swept dark hair, a plain mint-green jacket over a charcoal shirt, and simple teal headphones resting around the neck. No logo, patch, symbol, or branded detail. Different face shape, hair silhouette, and outfit from all other agents.",
       "palette": ["mint green", "charcoal", "teal"],
-      "signature_accessory": "Teal headphones and code-bracket patch",
+      "signature_accessory": "Plain teal headphones with no branding",
       "signature_pose": "One finger pointing toward an idea",
       "signature_motion": "Quick point, small head tilt, and blink",
       "exclusive_use": true
@@ -30,19 +31,19 @@
     "codex_owl": {
       "agent": "codex",
       "name": "Noah",
-      "visual_identity": "A distinct cartoon presenter with neatly swept dark hair, round amber glasses, cobalt-blue hoodie, and a tiny owl-shaped notebook emblem. The owl is only a small emblem; the character is a human cartoon presenter.",
+      "visual_identity": "A distinct cartoon presenter with neatly swept dark hair, round amber glasses, and a plain cobalt-blue hoodie with no badge, logo, patch, emblem, or symbol. The character is a human cartoon presenter, not an owl or mascot.",
       "palette": ["cobalt blue", "amber", "navy"],
-      "signature_accessory": "Round amber glasses",
-      "signature_pose": "Holding an open notebook while explaining",
+      "signature_accessory": "Simple round amber glasses",
+      "signature_pose": "Holding a small plain notebook while explaining",
       "signature_motion": "Glasses adjustment, page turn, and blink",
       "exclusive_use": true
     },
     "chatgpt_orbit": {
       "agent": "chatgpt",
       "name": "Zia",
-      "visual_identity": "A distinct cartoon presenter with a short curly dark hairstyle, violet hoodie, and a small original orbit-star patch. Different face shape and hair silhouette from the other agents.",
+      "visual_identity": "A distinct cartoon presenter with a short curly dark hairstyle and a plain violet hoodie with no badge, logo, patch, emblem, or symbol. Different face shape and hair silhouette from the other agents.",
       "palette": ["violet", "lavender", "gold"],
-      "signature_accessory": "Orbit-star hoodie patch",
+      "signature_accessory": "Simple plain gold wristwatch with no branding",
       "signature_pose": "Palm-up presenting gesture",
       "signature_motion": "Gentle hand presentation, blink, and slight head turn",
       "exclusive_use": true
