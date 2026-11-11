@@ -52,5 +52,43 @@
 </div>
 <script>
 document.getElementById('refresh').addEventListener('click',()=>location.reload());
+(async function loadLiveData(){
+  const agentKeys=['claude','opencode','codex','chatgpt'];
+  const cards=[...document.querySelectorAll('.agent')];
+  const setText=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value;};
+  try{
+    const response=await fetch('/api/status',{cache:'no-store'});
+    if(!response.ok)throw new Error('Status endpoint unavailable');
+    const result=await response.json();
+    if(!result.ok)throw new Error('Workflow data unavailable');
+    const {control,assignments,status}=result.data;
+    const videos=status.videos||{};
+    let ready=0,active=0;
+    agentKeys.forEach((key,index)=>{
+      const item=videos[key]||{};
+      const state=String(item.status||'not_started').replaceAll('_',' ');
+      if(item.status==='ready'||item.status==='validated_ready')ready++;
+      if(['running','in_progress','generating'].includes(item.status))active++;
+      const badge=cards[index]?.querySelector('.status');
+      if(badge){badge.textContent=state;badge.style.color=(item.status==='ready'||item.status==='validated_ready')?'#55d6a2':'#f4c66a';}
+      const detail=cards[index]?.querySelector('b');
+      if(detail)detail.textContent=item.title||'1 Short / batch';
+    });
+    setText('.grid .stat:nth-child(3) strong',String(status.queue?.validated_ready_count??ready));
+    setText('.grid .stat:nth-child(4) strong',control.mode==='running'?'Running':control.mode==='paused'?'Paused':String(control.mode||'Unknown'));
+    setText('.topright .pill','● GitHub data connected');
+    setText('.sectionhead span','Live repository status · '+new Date(result.updatedAt).toLocaleTimeString());
+    const rows=[...document.querySelectorAll('.table tbody tr')];
+    agentKeys.forEach((key,index)=>{
+      const item=videos[key]||{};
+      const cell=rows[index]?.lastElementChild;
+      if(cell)cell.textContent=String(item.status||'not_started').replaceAll('_',' ');
+    });
+    const notice=document.querySelector('.notice');
+    if(notice)notice.innerHTML='<b>Live repository data loaded.</b> Agent execution, task dispatch, video storage and publishing are still separate integrations and are not activated by this dashboard.';
+  }catch(e){
+    setText('.topright .pill','● Demo data · API unavailable');
+  }
+})();
 </script>
 </body></html>
