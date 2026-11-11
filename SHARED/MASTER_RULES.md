@@ -2,19 +2,25 @@
 
 All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, AGENT_CHARACTERS.json, topic history, today's assignment, and their own instructions before generation.
 
+## Educational channel identity
+- This is an educational and interesting-facts channel. Topic discovery must stay within educational content: science, space, technology, nature, history, geography, engineering, useful everyday explanations, and verified surprising facts.
+- Do not select reaction videos, reaction commentary, creator drama, celebrity gossip, memes, prank compilations, or trend-chasing entertainment formats.
+- A trending subject is eligible only when it can be turned into a factual educational explainer or a verified fun fact. The video itself must teach something.
+- Use a clear learning takeaway. Entertainment, humour, suspense, and storytelling may support learning but must not replace it.
+
 ## Daily batch
 - Four-agent target: one Short each from Claude, OpenCode, Codex, and ChatGPT.
 - Each agent must verify its actual tools and production capabilities. If unavailable, mark that agent blocked/missing; never pretend or silently claim a completed output.
 - Reserve four distinct assignments before agents start. If an agent is unavailable, the coordinator may publish the validated available queue at the configured midnight fallback; do not fabricate its output.
 
-## Trend-aware topic selection
-- Before choosing a topic, research current YouTube Shorts trends and relevant audience interests using accessible, legitimate sources and current data. Prefer recent evidence over guesses.
-- Consider search interest, recent view velocity where available, repeated audience questions, current events only when relevant, and proven interest in the subject. Record source, date checked, geography/language if known, and limitations.
+## Trend-aware educational topic selection
+- Research current educational interest and educationally relevant YouTube Shorts trends using accessible, legitimate sources and current data.
+- Prioritize rising questions, science/space discoveries, technology explainers, historical/geographical curiosities, nature facts, and practical "how/why" topics with credible evidence.
+- Exclude reaction-led trends and topics whose main appeal is watching someone else's reaction or drama.
+- Record source, date checked, geography/language if known, and limitations. Never invent trend data, views, search volume, or viral probabilities.
 - Score candidate topics using the rubric in `SHARED/TREND_AND_STYLE_SELECTION.md`. Treat the score as a prioritization aid, not a prediction or guarantee of virality.
-- Prefer topics with strong curiosity, a clear visual explanation, a surprising but verifiable payoff, broad audience relevance, and enough credible sources.
-- Avoid chasing trends that are unsafe, misleading, overly sensitive, already saturated, or impossible to fact-check well. Never invent trend data, views, search volume, or viral probabilities.
-- Do not claim a video will go viral. Use wording such as "promising topic based on available signals"; YouTube distribution and audience response are uncertain.
-- Reserve four distinct topics/angles/hooks/story structures across the batch. Avoid duplicate or near-duplicate coverage.
+- Prefer curiosity, a strong educational hook, a clear visual explanation, a surprising but verifiable payoff, broad audience relevance, and credible sources.
+- Reserve four distinct educational topics/angles/hooks/story structures across the batch. Avoid duplicate or near-duplicate coverage.
 
 ## Adaptive style selection and creation
 - For every selected topic, choose the visual/storytelling style that best serves comprehension, emotional tone, pacing, and available production tools—not simply the agent's favourite style.
@@ -61,6 +67,12 @@ Each agent submits: finished vertical 2D video, title, sectioned description wit
 - If backlog reaches 15 validated videos, trigger a backlog-release batch containing the entire validated backlog together, overriding the normal four-video cap. Keep the release as one coordinated batch and record every video result.
 - Platform processing may cause actual public availability to differ by seconds; use one common scheduled timestamp and report actual timestamps. Do not promise exact same-second visibility.
 - Agents never upload. Coordinator alone uploads/schedules, with idempotency keys and partial-failure reconciliation.
+
+## Slash command control
+- The command contract is in `COMMANDS.md`; it is authoritative for `/short` and `/unshort`.
+- `/short` means start/resume the approved daily educational Shorts workflow and enable its configured schedule. It must not bypass validation, provider limits, or publishing safeguards.
+- `/unshort` means globally pause the schedule and stop/cancel active or queued automation tasks where the connected runner supports it. Preserve completed videos and checkpoints; do not delete user work.
+- Commands only take effect when received by a configured command dispatcher. A text command in an ordinary chat does not itself activate or stop external services.
 
 ## Comment
 - After each successful upload, attempt the configured channel comment once per video: `𝐒𝐮𝐛𝐬𝐜𝐫𝐢𝐛𝐞 𝐟𝐨𝐫 𝐦𝐨𝐫𝐞 𝐟𝐮𝐧 𝐟𝐚𝐜𝐭 𝐜𝐨𝐧𝐭𝐞𝐧𝐭 𝐚𝐧𝐝 𝐠𝐞𝐭 𝐧𝐨𝐭𝐢𝐟𝐢𝐞𝐝!`
