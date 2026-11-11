@@ -1,33 +1,35 @@
 # Faceless Shorts Automation
 
-Coordinated workflow for **three 2D animated YouTube Shorts per daily batch**:
+Coordinated workflow targeting **four original 2D animated YouTube Shorts per daily batch**:
 - Claude: one Short
 - OpenCode: one Short
-- Codex: one Short, subject to verifying that its connected tools and production capabilities support the assigned work
+- Codex: one Short, subject to verified access/capabilities
+- ChatGPT: one Short, subject to verified interactive/API runner capability
 
 ## Non-negotiable rules
-- Every video must be **2D animation only**. Never 3D.
-- One video per configured agent per batch.
-- No duplicate or substantially overlapping topics, angles, hooks, story structures, or primary visual styles.
-- All agents read SHARED rules and their AGENTS instructions before generation.
-- Use the installed Faceless Shorts skill first for ideas, formats, styles, and production methods. Never claim to have inspected it unless accessible.
-- All three voice-over voices should be distinguishable; record the actual provider and preset.
-- Each video needs a YouTube title and a sectioned description with a Sources section. Public descriptions list source/publisher names only, with no URLs.
-- Agents do not upload directly. The coordinator controls the batch gate.
+- Genuine 2D animation only; never 3D.
+- One assigned video per available agent per batch.
+- Each agent uses only its own fixed original character from `SHARED/AGENT_CHARACTERS.json`.
+- No substantially overlapping topics, angles, hooks, story structures, or dominant visual styles.
+- All agents read shared rules and role instructions before generation.
+- Use the installed Faceless Shorts skill first when accessible.
+- Prefer distinguishable voices and record actual provider/preset.
+- Public description is sectioned and its Sources section lists source/publisher names only, without URLs.
+- Agents do not upload. The coordinator alone validates and publishes.
 
-## Workflow
-1. Coordinator checks availability and reserves three distinct assignments before generation.
-2. Agents generate one 2D Short each.
-3. Coordinator collects files and metadata.
-4. Validate completeness, 2D-only production, uniqueness, sources, rights, and voice separation.
-5. Upload only if all three pass. If one fails, hold the entire batch.
-6. Record YouTube IDs and upload results; retries must not create duplicates.
+## Publishing schedule (Asia/Kolkata)
+- Normal target/cap: four Shorts per day.
+- At 18:00, if four validated videos are queued, schedule all four for one common publication timestamp.
+- If fewer than four are ready at 18:00, wait until 00:00, then publish/schedule the validated available queue together.
+- Keep extra validated videos in persistent storage for the next day.
+- If backlog reaches 15, release the entire validated backlog together as one coordinated batch; this is an explicit override of the normal four-video cap.
+- The YouTube platform may not make every video publicly visible at the exact same second, even when the same timestamp is scheduled.
+
+## Notifications
+Structured alerts are defined for agent limits/expiry, missing outputs, failures, manual actions, queue status, and publishing outcomes. WhatsApp delivery is optional and not configured until an approved WhatsApp Business, Twilio, or Zapier integration is connected. Do not put phone numbers, tokens, or webhook secrets in this public repository.
 
 ## Important capability note
-The repository is an instruction and coordination scaffold; it does not itself make Claude, OpenCode, or Codex run on a schedule. Each agent's actual GitHub access, tools, rendering path, and voice capability must be tested. Do not claim a workflow is operational until its triggers and end-to-end output have been verified.
+This repository is a configuration/instruction scaffold, not yet a live scheduler. Agent invocations, durable shared storage, scheduled YouTube uploads, comments, WhatsApp notifications, and automatic resume must each be implemented and tested with supported integrations before they can be considered operational.
 
-## Cost
-Repository files and local scripts can be free. AI model usage, voice generation, rendering/storage, Zapier tasks, and integrations may have limits or costs. Do not add paid APIs or subscriptions without approval.
-
-## Security
-This repository is public. Never commit API keys, passwords, tokens, webhook URLs, private logs, or personal information. Keep secrets in environment variables or an ignored local .env file.
+## Cost and security
+Use existing/free tools where possible. No paid API, subscription, model, or trial without explicit approval. Never commit API keys, passwords, tokens, webhook URLs, private logs, or personal information. Keep secrets in a secure credential store or ignored local environment file.
