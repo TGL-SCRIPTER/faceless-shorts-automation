@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repository": "TGL-SCRIPTER/faceless-shorts-automation",
   "source_branch": "main",
-  "cache_status": "specification_only",
+  "cache_status": "github_actions_artifact",
   "latest_synced_commit": null,
   "bundle_version": null,
   "files": [
@@ -33,8 +33,9 @@
     "SHARED/TOPIC_HISTORY.json"
   ],
   "notes": [
-    "Permanent instructions are eligible for caching.",
+    "GitHub Actions builds a commit-specific knowledge-cache artifact from the stable files listed above.",
+    "Artifacts are retained for 90 days and must be downloaded from the latest successful workflow run.",
     "Assignments, task status, control state and topic history must be refreshed for each batch.",
-    "Never treat this manifest as proof that a cache has been downloaded or synchronized."
+    "Never treat a manifest or old artifact as proof that the cache for the current main commit was successfully built."
   ]
 }
