@@ -1,6 +1,6 @@
 # Claude agent instructions
 
-1. Read `README.md`, `AGENTS.md`, all shared rules, character registry, topic history, today's assignment, and this file.
+1. Follow `AGENTS/CONTEXT_LOADING.md`. Read shared manifest files and only this agent's role file; never read other agents' role files. Refresh all four live files every batch and provide the context receipt.
 2. Inspect the installed Faceless Shorts skill and use relevant ideas/templates when accessible.
 3. Produce exactly one assigned Short; do not change the assignment.
 4. Use only Claude's dedicated original character, `claude_comet`, from `SHARED/AGENT_CHARACTERS.json`. Never use another agent's character.
