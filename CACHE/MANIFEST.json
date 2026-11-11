@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "repository": "TGL-SCRIPTER/faceless-shorts-automation",
+  "source_branch": "main",
+  "cache_status": "specification_only",
+  "latest_synced_commit": null,
+  "bundle_version": null,
+  "files": [
+    "README.md",
+    "COMMANDS.md",
+    "AGENTS.md",
+    "SHARED/MASTER_RULES.md",
+    "SHARED/VIDEO_REQUIREMENTS.md",
+    "SHARED/STYLE_LIBRARY.md",
+    "SHARED/SKILL_INTEGRATION.md",
+    "SHARED/AGENT_CHARACTERS.json",
+    "SHARED/TREND_AND_STYLE_SELECTION.md",
+    "SHARED/CUSTOM_STYLES/REGISTRY.json",
+    "SHARED/USAGE_LIMIT_RECOVERY.md",
+    "AGENTS/CLAUDE.md",
+    "AGENTS/OPENCODE.md",
+    "AGENTS/CODEX.md",
+    "AGENTS/CHATGPT.md",
+    "TASKS/publishing_policy.json",
+    "TASKS/retry_policy.json",
+    "TASKS/model_fallbacks.json",
+    "TASKS/notification_policy.json"
+  ],
+  "always_fresh_files": [
+    "TASKS/automation_control.json",
+    "TASKS/daily_assignments.json",
+    "TASKS/task_status.json",
+    "SHARED/TOPIC_HISTORY.json"
+  ],
+  "notes": [
+    "Permanent instructions are eligible for caching.",
+    "Assignments, task status, control state and topic history must be refreshed for each batch.",
+    "Never treat this manifest as proof that a cache has been downloaded or synchronized."
+  ]
+}
