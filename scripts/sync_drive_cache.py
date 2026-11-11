@@ -1,118 +1,77 @@
 #!/usr/bin/env python3
-"""Build and sync the stable knowledge cache to Google Drive."""
-import base64
+"""Build a verified knowledge-cache bundle for GitHub Actions artifacts.
+
+Uses only the Python standard library. No Google Cloud account, service account,
+external storage, or third-party Python package is required.
+"""
 import hashlib
 import json
 import os
-import urllib.parse
-import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 
-from google.oauth2 import service_account
-from google.auth.transport.requests import AuthorizedSession
-
-OWNER_REPO = "TGL-SCRIPTER/faceless-shorts-automation"
-BRANCH = "main"
-FOLDER_ID = os.environ["GOOGLE_DRIVE_FOLDER_ID"]
-SCOPES = ["https://www.googleapis.com/auth/drive"]
-TOKEN = os.environ["GITHUB_TOKEN"]
-API = "https://api.github.com/repos/" + OWNER_REPO
-DRIVE = "https://www.googleapis.com/drive/v3/files"
-
-def github_json(path):
-    req = urllib.request.Request(
-        API + path,
-        headers={"Authorization": "Bearer " + TOKEN,
-                 "Accept": "application/vnd.github+json",
-                 "X-GitHub-Api-Version": "2022-11-28"})
-    with urllib.request.urlopen(req) as response:
-        return json.load(response)
-
-def github_text(path, ref):
-    url = API + "/contents/" + urllib.parse.quote(path, safe="/") + "?ref=" + urllib.parse.quote(ref)
-    data = github_json(url[len(API):])
-    raw = base64.b64decode(data["content"])
-    return raw.decode("utf-8"), data["sha"]
-
-def drive_session():
-    info = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"])
-    credentials = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
-    return AuthorizedSession(credentials)
-
-def upsert_drive(session, name, content, mime="application/json"):
-    query = urllib.parse.urlencode({
-        "q": "'" + FOLDER_ID + "' in parents and name='" + name.replace("'", "\\'") + "' and trashed=false",
-        "fields": "files(id,name)",
-        "pageSize": "10"
-    })
-    with session.get(DRIVE + "?" + query) as response:
-        response.raise_for_status()
-        matches = response.json().get("files", [])
-    metadata = {"name": name, "mimeType": mime}
-    boundary = "cache-sync-boundary"
-    body = (
-        "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" +
-        json.dumps(metadata) + "\r\n--" + boundary +
-        "\r\nContent-Type: " + mime + "\r\n\r\n" + content +
-        "\r\n--" + boundary + "--"
-    ).encode("utf-8")
-    if matches:
-        file_id = matches[0]["id"]
-        url = DRIVE + "/" + file_id + "?uploadType=multipart"
-        method = session.patch
-    else:
-        url = DRIVE + "?uploadType=multipart&fields=id,name"
-        method = session.post
-    with method(url, data=body, headers={"Content-Type": "multipart/related; boundary=" + boundary}) as response:
-        response.raise_for_status()
-        result = response.json()
-    # Remove accidental duplicates with the same name after successful update.
-    if matches:
-        for duplicate in matches[1:]:
-            session.delete(DRIVE + "/" + duplicate["id"]).raise_for_status()
-    print("Synced", name, result.get("id"))
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "dist" / "knowledge-cache"
+MANIFEST_PATH = ROOT / "CACHE" / "MANIFEST.json"
+EXTRA_PATHS = [
+    "CACHE/MANIFEST.json",
+    "CACHE/README.md",
+    "SHARED/KNOWLEDGE_CACHE_PROTOCOL.md",
+]
 
 def main():
-    ref = github_json("/git/ref/heads/" + BRANCH)
-    commit = ref["object"]["sha"]
-    manifest_text, manifest_blob_sha = github_text("CACHE/MANIFEST.json", commit)
-    manifest = json.loads(manifest_text)
-    stable_paths = list(manifest["files"])
-    extra_paths = ["CACHE/MANIFEST.json", "CACHE/README.md", "SHARED/KNOWLEDGE_CACHE_PROTOCOL.md"]
-    paths = list(dict.fromkeys(stable_paths + extra_paths))
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    paths = list(dict.fromkeys(manifest["files"] + EXTRA_PATHS))
     files = {}
-    for path in paths:
-        content, blob_sha = github_text(path, commit)
-        files[path] = {
-            "git_blob_sha": blob_sha,
+    for relative in paths:
+        path = ROOT / relative
+        if not path.is_file():
+            raise FileNotFoundError(f"Required cache file is missing: {relative}")
+        content = path.read_text(encoding="utf-8")
+        files[relative] = {
             "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
-            "content": content
+            "content": content,
         }
+
+    commit = os.environ.get("GITHUB_SHA", "local-build")
+    built_at = datetime.now(timezone.utc).isoformat()
     bundle = {
         "schema_version": 1,
-        "repository": OWNER_REPO,
-        "branch": BRANCH,
+        "repository": "TGL-SCRIPTER/faceless-shorts-automation",
+        "branch": os.environ.get("GITHUB_REF_NAME", "main"),
         "source_commit": commit,
-        "synced_at": datetime.now(timezone.utc).isoformat(),
+        "built_at": built_at,
         "file_count": len(files),
-        "files": files
+        "files": files,
     }
-    bundle_text = json.dumps(bundle, ensure_ascii=False, indent=2)
     index = {
         "schema_version": 1,
-        "repository": OWNER_REPO,
-        "branch": BRANCH,
+        "repository": bundle["repository"],
+        "branch": bundle["branch"],
         "source_commit": commit,
-        "synced_at": bundle["synced_at"],
+        "built_at": built_at,
         "bundle_file": "KNOWLEDGE-CACHE.json",
         "file_count": len(files),
-        "files": {p: {"git_blob_sha": v["git_blob_sha"], "sha256": v["sha256"]} for p, v in files.items()},
+        "files": {
+            name: {"sha256": item["sha256"]}
+            for name, item in files.items()
+        },
         "always_fresh_files": manifest.get("always_fresh_files", []),
-        "note": "Automatically synced from GitHub main. Dynamic files are deliberately excluded."
+        "storage": "GitHub Actions artifact",
+        "note": "Dynamic files are deliberately excluded and must be fetched live.",
     }
-    session = drive_session()
-    upsert_drive(session, "KNOWLEDGE-CACHE.json", bundle_text)
-    upsert_drive(session, "CACHE-INDEX.json", json.dumps(index, ensure_ascii=False, indent=2))
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "KNOWLEDGE-CACHE.json").write_text(
+        json.dumps(bundle, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (OUT / "CACHE-INDEX.json").write_text(
+        json.dumps(index, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Built {len(files)} files for commit {commit}")
+    print(f"Output: {OUT}")
 
 if __name__ == "__main__":
     main()
