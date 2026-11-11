@@ -1,44 +1,20 @@
-# Knowledge cache protocol
+# Knowledge cache and agent loading protocol
 
-## Storage and source of truth
-GitHub `main` is the source of truth. GitHub Actions builds a complete cache bundle
-and publishes it as a downloadable Actions artifact. No external cloud storage is
-required. Artifacts are retained for 90 days.
+## Source of truth
+GitHub `main` is the source of truth. The Actions artifact is optional packaged cache storage with 90-day retention. It is not automatically injected into agent context and is not required for agents to read instructions.
 
-## What belongs in the cache
-Stable instructions, production standards, character definitions, role instructions,
-style definitions, and stable publishing/retry policies listed in
-`CACHE/MANIFEST.json`.
+## Minimal startup reads
+Every agent follows `AGENTS/CONTEXT_LOADING.md`:
+- Read `CACHE/MANIFEST.json` and `AGENTS.md`.
+- Read shared stable files listed in the manifest and only that agent's own role file. Never read other agents' role files.
+- Fetch all four `always_fresh_files` directly from GitHub for every batch.
+- Do not scan or fetch unrelated repository files.
 
-## What must remain live
-The global pause/run state, today's assignments, current task statuses, topic history,
-and any per-batch data. Refresh these directly from GitHub at the start of every batch.
-Never let a stale cached assignment or topic history authorize duplicate work.
+## Reuse and integrity
+Reuse stable context within a session while the source commit remains unchanged. A local bundle may replace individual stable-file reads only after repository, source commit, schema, and every SHA-256 checksum validate. Always refresh live files directly from GitHub. If a listed file is missing or freshness cannot be verified, report the blocker and stop.
 
-## Startup sequence for every agent
-1. Identify the latest successful **Build GitHub knowledge cache** workflow run.
-2. Download its artifact and confirm its source commit matches the intended `main`
-   commit.
-3. Verify the bundle schema, repository, commit SHA, and per-file SHA-256 checksums.
-4. Refresh every `always_fresh_files` directly from GitHub.
-5. Confirm the global mode is running and the task is assigned to this agent.
-6. Load the stable bundle into the task context before generation.
+## Artifact workflow
+GitHub Actions packages manifest files and checksums for optional download. It does not invoke agents or inject content into Claude, OpenCode, Codex, or ChatGPT. Each agent must have its own working GitHub/repository access.
 
-## Update sequence
-1. A relevant push to `main` triggers the cache workflow.
-2. The workflow reads all manifest files from that exact checkout.
-3. It builds the full bundle and checksum index.
-4. GitHub Actions stores both files in a commit-specific artifact.
-5. Agents adopt the new bundle at their next safe task boundary.
-
-## Failure behavior
-If the workflow fails, the artifact is missing, the source commit does not match,
-or integrity checks fail, do not claim synchronization succeeded. Do not silently
-use an older bundle as current. Keep the last artifact only for diagnosis/rollback,
-marked stale.
-
-## Important boundary
-This artifact workflow stores and versions the cache, but does not automatically
-download it into Claude, OpenCode, Codex, or ChatGPT. Each agent runner still needs
-a download-and-load step. It also does not implement the project dispatcher,
-scheduler, or publishing automation.
+## Not implemented
+This protocol does not implement a daily scheduler, agent invocation, video rendering, coordinator, YouTube publishing, command dispatcher, or WhatsApp notifications.
