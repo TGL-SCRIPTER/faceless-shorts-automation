@@ -31,5 +31,14 @@ Use the installed Faceless Shorts skill's ideas, templates, formats, styles, and
 - Comic-panel transitions
 - Whiteboard-style 2D diagrams
 
+## Adaptive style selection
+- Choose the style after the topic is selected, based on what best communicates that specific topic.
+- Evaluate existing catalogue styles first. Agents may invent a new topic-specific style when existing options are a poor fit.
+- New styles must be genuinely original, production-feasible, 2D-only, and documented under `SHARED/CUSTOM_STYLES/`.
+- Each custom style spec must include: name, topic/use case, visual grammar, palette, character integration, scene composition, motion language, caption/typography rules, transitions, storyboard sample, production requirements, and accessibility/readability notes.
+- Add accepted styles to `SHARED/CUSTOM_STYLES/REGISTRY.json` with creator agent, creation date, topic, and a concise description.
+- Custom styles are optional. Do not force novelty if an existing style is a better fit.
+- Do not imitate living artists, copyrighted franchises, existing creators' signature styles, or branded visual identities.
+
 ## Batch variation
 Coordinator assigns different primary storytelling formats and dominant visual treatments within each batch where feasible. Check recent history to avoid repetitive combinations. A style's 3D origin does not permit 3D output; convert it to genuine 2D.
