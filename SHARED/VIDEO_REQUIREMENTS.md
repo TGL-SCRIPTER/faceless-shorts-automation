@@ -5,13 +5,31 @@
 - One assigned Short per agent per daily batch; availability must be verified.
 - Animation: genuine 2D only; never 3D.
 - Each agent uses only its own fixed original character from `SHARED/AGENT_CHARACTERS.json`.
+- Topics should be selected using current trend/audience-interest evidence and the rubric in `SHARED/TREND_AND_STYLE_SELECTION.md`; no virality guarantee.
+- After topic selection, choose the best-fitting existing visual style or create a documented original topic-specific 2D style if needed.
 - No duplicate or substantially overlapping topics, angles, hooks, story structures, or primary styles.
 - Prefer four distinguishable voice-over presets; record actual provider and preset.
 - Public description has sections and a Sources section listing source/publisher names only; no URLs.
 - Normal publishing cap/target: 4 Shorts/day; see publishing policy for 18:00/00:00 schedule and 15-video backlog override.
-- Extra validated videos are stored, never deleted, and queued for later publication.
+- Extra finished videos are stored, never deleted, and queued for later publication.
 - Agents never publish directly; coordinator only.
 - No paid API/service/model fallback without explicit approval.
+
+## Per-video deliverables
+- [ ] Video file exists and plays.
+- [ ] Genuine 2D animation only; no 3D models, renders, geometry, or environments.
+- [ ] Agent's own character is used consistently and no other agent's character appears.
+- [ ] Topic trend evidence, date checked, geography/language, sources and evidence limitations recorded.
+- [ ] Topic selection score and rationale recorded; score is not represented as a viral probability.
+- [ ] Selected style, whether existing/adapted/new, and topic-fit rationale recorded.
+- [ ] If custom style: complete spec and registry entry saved.
+- [ ] Topic, angle, hook, structure, and visual style are distinct from other agents.
+- [ ] Voice preset recorded and voice separation reviewed.
+- [ ] Accurate title and sectioned description.
+- [ ] Sources section has names only, no URLs.
+- [ ] Claims and sources checked.
+- [ ] Asset rights documented.
+- [ ] Queue metadata and idempotency key recorded.
 
 ## Settings still to confirm before live publishing
 - Language and target duration
@@ -24,15 +42,3 @@
 - Whether scheduled publishing at 18:00/00:00 is enabled in YouTube integration
 - WhatsApp Business/Twilio/Zapier notification provider and recipient (keep secrets out of GitHub)
 - Human approval requirement for public publishing
-
-## Per-video checklist
-- [ ] File exists and plays.
-- [ ] Genuine 2D animation only; no 3D models, renders, geometry, or environments.
-- [ ] Agent's own character is used consistently and no other agent's character appears.
-- [ ] Topic, angle, hook, structure, and visual style are distinct.
-- [ ] Voice preset recorded and voice separation reviewed.
-- [ ] Accurate title and sectioned description.
-- [ ] Sources section has names only, no URLs.
-- [ ] Claims and sources checked.
-- [ ] Asset rights documented.
-- [ ] Queue metadata and idempotency key recorded.
