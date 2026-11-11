@@ -7,6 +7,23 @@ All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, AGENT_CHARAC
 - Each agent must verify its actual tools and production capabilities. If unavailable, mark that agent blocked/missing; never pretend or silently claim a completed output.
 - Reserve four distinct assignments before agents start. If an agent is unavailable, the coordinator may publish the validated available queue at the configured midnight fallback; do not fabricate its output.
 
+## Trend-aware topic selection
+- Before choosing a topic, research current YouTube Shorts trends and relevant audience interests using accessible, legitimate sources and current data. Prefer recent evidence over guesses.
+- Consider search interest, recent view velocity where available, repeated audience questions, current events only when relevant, and proven interest in the subject. Record source, date checked, geography/language if known, and limitations.
+- Score candidate topics using the rubric in `SHARED/TREND_AND_STYLE_SELECTION.md`. Treat the score as a prioritization aid, not a prediction or guarantee of virality.
+- Prefer topics with strong curiosity, a clear visual explanation, a surprising but verifiable payoff, broad audience relevance, and enough credible sources.
+- Avoid chasing trends that are unsafe, misleading, overly sensitive, already saturated, or impossible to fact-check well. Never invent trend data, views, search volume, or viral probabilities.
+- Do not claim a video will go viral. Use wording such as "promising topic based on available signals"; YouTube distribution and audience response are uncertain.
+- Reserve four distinct topics/angles/hooks/story structures across the batch. Avoid duplicate or near-duplicate coverage.
+
+## Adaptive style selection and creation
+- For every selected topic, choose the visual/storytelling style that best serves comprehension, emotional tone, pacing, and available production tools—not simply the agent's favourite style.
+- Evaluate the existing styles in `SHARED/STYLE_LIBRARY.md` first. If none is a good fit, the agent may propose and create a new original style for that specific topic.
+- A new style must have a name, purpose, visual grammar, palette, scene rules, motion language, typography/caption rules, transition rules, sample storyboard, and production feasibility notes. Save its specification in `SHARED/CUSTOM_STYLES/` and add a summary to the style registry.
+- New styles must remain genuine 2D, compatible with the agent's assigned character, distinct from other agents' styles in the same batch, and must not imitate a living artist, copyrighted franchise, or another creator's signature style.
+- Do not create a new style merely for novelty. Reuse or refine a proven style when it fits the topic better.
+- Record why the selected style fits the topic and whether it is existing, adapted, or newly created.
+
 ## Character separation
 - Each agent has one fixed original character defined in `SHARED/AGENT_CHARACTERS.json`.
 - The assigned agent may use only its own character. No cross-agent character reuse, swaps, or lookalike copies.
@@ -14,14 +31,14 @@ All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, AGENT_CHARAC
 
 ## 2D only
 - Every finished Short must be genuine 2D animation.
-- All six Faceless Shorts skill styles are allowed, but Deep Dive, Night File, and Tall Tale must be redesigned as genuine 2D before production.
+- All six Faceless Shorts skill styles are available, but Deep Dive, Night File, and Tall Tale must be redesigned as genuine 2D before production.
 - 3D models, geometry, renders, environments, and scenes are prohibited, even if described as stylized or flattened.
 - Preserve the original style's mood and storytelling while replacing all 3D elements with 2D artwork and 2D motion.
 - Follow `SHARED/SKILL_INTEGRATION.md` and document a 2D conversion plan for any 3D-origin style.
 - Explicitly confirm 2D-only production before submission.
 
 ## Skill-first and uniqueness
-- Inspect and use the installed Faceless Shorts skill for ideas, templates, formats, styles, and production methods.
+- Inspect and use the installed Faceless Shorts skill for ideas, templates, formats, and production methods.
 - Follow `SHARED/SKILL_INTEGRATION.md`.
 - Coordinator reserves four distinct assignments before agents start. Compare topic, entities, angle, hook, story progression/payoff, dominant 2D visual style, and character. A different title alone is not enough.
 - A shared JSON file is not an atomic lock. Use one coordinator as the sole assignment writer; until orchestration exists, assign sequentially.
@@ -34,14 +51,14 @@ All agents read this file, VIDEO_REQUIREMENTS.md, STYLE_LIBRARY.md, AGENT_CHARAC
 - Do not fabricate citations or use unlicensed music, footage, characters, or copied scripts.
 
 ## Deliverables
-Each agent submits: finished vertical 2D video, title, sectioned description with Sources, topic/angle/hook/story format/visual style, voice provider and preset, source names and private references, asset/licensing notes, and 2D confirmation.
+Each agent submits: finished vertical 2D video, title, sectioned description with Sources, topic/angle/hook/story format/visual style, trend evidence and score, style-selection rationale, voice provider and preset, source names and private references, asset/licensing notes, and 2D confirmation.
 
 ## Publishing and queue
 - Follow `TASKS/publishing_policy.json`.
-- Normal daily maximum/target is four published Shorts. At 18:00 Asia/Kolkata, if four validated videos are ready, schedule all four with the same publication timestamp.
+- Normal daily maximum/target is four videos. At 18:00 Asia/Kolkata, if four validated videos are ready, schedule all four with the same publication timestamp.
 - If fewer than four are ready at 18:00, wait until 00:00 Asia/Kolkata and then publish/schedule the validated available queue together.
 - Extra finished videos remain in persistent storage and enter the next-day queue; never discard them.
-- If the backlog reaches 15 validated videos, trigger a backlog-release batch containing the entire validated backlog together, overriding the normal four-video cap. Keep the release as one coordinated batch and record every video result.
+- If backlog reaches 15 validated videos, trigger a backlog-release batch containing the entire validated backlog together, overriding the normal four-video cap. Keep the release as one coordinated batch and record every video result.
 - Platform processing may cause actual public availability to differ by seconds; use one common scheduled timestamp and report actual timestamps. Do not promise exact same-second visibility.
 - Agents never upload. Coordinator alone uploads/schedules, with idempotency keys and partial-failure reconciliation.
 
