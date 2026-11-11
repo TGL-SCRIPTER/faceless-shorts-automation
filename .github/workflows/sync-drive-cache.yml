@@ -1,0 +1,32 @@
+name: Sync knowledge cache to Google Drive
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: drive-knowledge-cache-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Google authentication library
+        run: pip install google-auth requests
+      - name: Build and sync cache
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ vars.GOOGLE_DRIVE_FOLDER_ID }}
+        run: python scripts/sync_drive_cache.py
