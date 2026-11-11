@@ -1,42 +1,34 @@
-# Usage-limit pause and automatic resume
+# Usage-limit recovery and context rollover
 
-This policy lets the coordinator pause an agent when its provider reports a temporary usage/rate limit, wait, and retry the **same assignment** after the expected reset. It is designed for Claude, OpenCode, and Codex.
+This policy separates context-window management from provider quota/rate-limit recovery. They are different events and must never be confused.
 
-## Important distinction
+## OpenCode context at 90%
+1. Treat 90% context use as a checkpoint threshold, not a provider quota error.
+2. Save batch ID, assignment, completed steps, current files/paths, decisions, next exact step, validation still needed, and any non-persistent tool state.
+3. Stop starting new work; start a fresh OpenCode session only after the checkpoint is durable.
+4. Read the checkpoint and shared instructions in the new session, verify the same assignment, and continue from the next incomplete step.
+5. If the OpenCode client does not expose context percentage or cannot automatically create a fresh session, report the limitation for coordinator/manual action. Do not claim an automatic rollover occurred.
 
-This file documents the required behavior and provides settings. **It does not, by itself, create a running scheduler or make provider quotas reset faster.** The GitHub Actions/coordinator workflow must be implemented and enabled before automatic resume actually runs. Each agent also needs a supported way to be invoked by that workflow.
+## Provider quota/rate limit
+When any provider reports a temporary usage/rate limit:
+1. Stop requests to that provider. Do not hammer the endpoint.
+2. Save the current work and checkpoint.
+3. Mark the affected agent `waiting_for_reset`, record error evidence, retry count, and provider-supplied reset/Retry-After timestamp if present.
+4. Preserve batch ID, topic, angle, hook, character, assignment, and progress.
 
-## When an agent hits a limit
+## OpenCode GLM-5.3-Flash fallback
+- If GLM-5.3-Flash is temporarily unavailable due to a usage limit, check `TASKS/model_fallbacks.json`.
+- Use another model only when it is actually configured and available in the user's OpenCode environment, suitable for the remaining work, and within its legitimate allowance.
+- Prefer free/local models. Paid models, paid trials, new API keys, account changes, and additional subscriptions require explicit user approval.
+- Record fallback provider/model and why it was selected. The OpenCode agent and its fixed character do not change.
+- If no fallback qualifies, wait for the provider reset. Do not guess when GLM's quota resets.
 
-1. Stop making requests to that provider. Do not repeatedly hammer the endpoint.
-2. Save the current work and last safe checkpoint.
-3. Update that agent's entry in `TASKS/task_status.json`:
-   - `status`: `waiting_for_reset`
-   - `usage_recovery.state`: `waiting`
-   - `usage_recovery.reason`: `temporary_usage_limit`
-   - `usage_recovery.retry_after`: provider-supplied reset time in ISO-8601, if available; otherwise null
-   - `usage_recovery.last_checkpoint`: short description of what is complete
-   - `usage_recovery.retry_count`: increment the retry count
-4. Keep the original batch ID, topic, angle, hook, and assignment unchanged.
+## Coordinator retry
+- Prefer provider Retry-After/reset metadata. If none exists, use fallback cooldown in `TASKS/retry_policy.json`, then poll with configured backoff and jitter.
+- Re-check that the error is a temporary quota/rate limit and credentials/tools remain valid before resuming.
+- Resume the same assignment from the last safe checkpoint. Enforce retry cap.
+- Authentication/session expiry, billing, suspension, policy blocks, unknown errors, and persistent non-quota failures require manual intervention.
+- A quota reset does not require discarding the context checkpoint; a new context session does not reset a provider quota.
 
-## Coordinator behavior
-
-- Prefer an explicit provider `Retry-After` or reset timestamp when available.
-- If the provider gives no reset time, use the fallback cooldown in `TASKS/retry_policy.json`; then poll only at the configured interval with exponential backoff and jitter.
-- When the wait expires, re-check that the failure was a temporary quota/rate limit and that credentials and required tools are still valid.
-- Reinvoke the same agent on the same assignment from its last safe checkpoint.
-- Do not mark the task complete until its deliverables and normal validation checks pass.
-- Enforce the configured retry cap. After it is reached, mark the agent `manual_action_required` and notify the user.
-- If one agent is waiting, keep the three-video batch and upload gate on hold. Never upload a partial batch.
-
-## Cases that must not auto-retry
-
-Authentication/session expiry, billing/payment requirements, account suspension, policy blocks, unknown errors, and persistent non-quota failures require manual intervention. Never bypass provider limits, rotate accounts/credentials, or create extra accounts.
-
-## Provider-specific limitation
-
-Claude, OpenCode, and Codex may expose different error messages and reset metadata. The workflow must classify each provider's response using verified integration behavior. If a reliable quota signal or invocation path is unavailable for an agent, mark that agent as requiring manual action instead of guessing.
-
-## Configuration
-
-See `TASKS/retry_policy.json` for cooldown, polling, backoff, retry cap, and safety settings. A future workflow should read that file rather than hard-code these values.
+## Operational limitation
+These instructions and JSON settings are policy only. Automatic resume and automatic context rollover require a working coordinator scheduler and a supported OpenCode invocation/session-control integration. Until tested end-to-end, manual intervention may be required. Never claim automation is live merely because configuration exists.
